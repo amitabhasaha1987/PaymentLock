@@ -1,0 +1,604 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/component.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+@*<script src="~/Scripts/modernizr.custom.js"></script>*@
+
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#datetimepicker1').datepicker();
+    });
+      $(document).ready(function () {
+        
+        backgrounds = [
+         "../Image/1.jpg",
+         "../Image/2.jpg",
+         "../Image/3.jpg"
+        ];
+
+        var hsh1 = GetParameterValues('hsh1');
+        var a = GetParameterValues('a');
+        if (a == null)
+            a = 1;
+        changeBackground(a);
+       
+    });
+      function changeBackground(i) {
+          debugger;
+        $('body').css('background', '#000 url(' + backgrounds[i] + ') ');
+    }
+    function GetParameterValues(param) {
+        var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < url.length; i++) {
+            var urlparam = url[i].split('=');
+            if (urlparam[0] == param) {
+                return urlparam[1];
+            }
+        }
+    }
+</script>
+<div class="container body-content">
+    <div class="">
+        <h1>Payment Lock</h1>
+    </div>
+    <div id="form">
+        <div class="row">
+            @*<div class="col-md-offset-4 col-md-16">*@
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a id="collapse-one-tab" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+                                <i class="pull-right icon-down-open-big"></i> 1. Order Information
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                        <div class="panel-body">
+                            <form id="general-info" class="form-horizontal" action="/home/save_general_form" method="post" novalidate="novalidate">
+                                <input type="hidden" name="invoice_id" value="0">
+                                <input type="hidden" name="salesperson_id" value="10">
+                                <input type="hidden" name="venue_id" id="venue-id">
+                                <div class="form-group">
+                                    <label for="groupname" class="col-md-2 control-label">* Group Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="group_name" id="groupname" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event_name" class="col-md-2 control-label">* Event Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="event_name" class="form-control" id="event_name" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="guestfirstname" class="col-md-2 control-label">* Guest First Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="guest_first_name" class="form-control" id="guestfirstname" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="guestlastname" class="col-md-2 control-label">* Guest Last Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="guest_last_name" class="form-control" id="guestlastname" maxlength="50">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="guestemailname" class="col-md-2 control-label">* Guest Email Address</label>
+                                    <div class="col-sm-4">
+                                        <input type="email" name="guest_email" class="form-control" id="guestemailname">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telnum" class="col-md-2 control-label">* Telephone Number</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="phone" class="form-control phone-us" id="telnum" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="faxnum" class="col-md-2 control-label">Fax Number</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="fax" class="form-control phone-us" id="faxnum" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col-md-2 control-label">* Venue</label>
+                                        <div class="col-sm-4">
+                                            <div class="dl-trigger form-control">Choose Venue</div>
+                                            <div id="dl-menu" class="dl-menuwrapper">
+                                              
+                                                <ul class="dl-menu">
+                                                    <li>
+                                                        <a href="#">Los Angeles</a>
+                                                        <ul class="dl-submenu">
+                                                            <li class="dl-back"><a href="#">back</a></li>
+                                                            <li>
+                                                                <a href="#">Catering</a>
+                                                                <ul class="dl-submenu">
+                                                                    <li class="dl-back"><a href="#">back</a></li>
+                                                                    <li><a href="#" data-id="41" data-name="sbe Catering" class="venue-last">sbe Catering</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Hotel</a>
+                                                                <ul class="dl-submenu">
+                                                                    <li class="dl-back"><a href="#">back</a></li>
+                                                                    <li><a href="#" data-id="19" data-name="THE REDBURY HOLLYWOOD" class="venue-last">THE REDBURY HOLLYWOOD</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Nightlife</a>
+                                                                <ul class="dl-submenu">
+                                                                    <li class="dl-back"><a href="#">back</a></li>
+                                                                    <li><a href="#" data-id="10" data-name="COLONY" class="venue-last">COLONY</a></li>
+                                                                    <li><a href="#" data-id="3" data-name="CREATE NIGHTCLUB" class="venue-last">CREATE NIGHTCLUB</a></li>
+                                                                    <li><a href="#" data-id="4" data-name="GREYSTONE MANOR" class="venue-last">GREYSTONE MANOR</a></li>
+                                                                    <li><a href="#" data-id="5" data-name="HYDE LOUNGE AT STAPLES CENTER" class="venue-last">HYDE LOUNGE AT STAPLES CENTER</a></li>
+                                                                    <li><a href="#" data-id="6" data-name="THE ABBEY FOOD &amp; BAR" class="venue-last">THE ABBEY FOOD &amp; BAR</a></li>
+                                                                    <li><a href="#" data-id="7" data-name="THE EMERSON THEATRE" class="venue-last">THE EMERSON THEATRE</a></li>
+                                                                    <li><a href="#" data-id="8" data-name="THE LIBRARY" class="venue-last">THE LIBRARY</a></li>
+                                                                    <li><a href="#" data-id="9" data-name="THE SAYERS CLUB HOLLYWOOD" class="venue-last">THE SAYERS CLUB HOLLYWOOD</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Restaurant</a>
+                                                                <ul class="dl-submenu">
+                                                                    <li class="dl-back"><a href="#">back</a></li>
+                                                                    <li><a href="#" data-id="11" data-name="CLEO HOLLYWOOD" class="venue-last">CLEO HOLLYWOOD</a></li>
+                                                                    <li><a href="#" data-id="12" data-name="HYDE SUNSET KITCHEN+ COCKTAILS" class="venue-last">HYDE SUNSET KITCHEN+ COCKTAILS</a></li>
+                                                                    <li><a href="#" data-id="13" data-name="KATSUYA BRENTWOOD" class="venue-last">KATSUYA BRENTWOOD</a></li>
+                                                                    <li><a href="#" data-id="14" data-name="KATSUYA GLENDALE" class="venue-last">KATSUYA GLENDALE</a></li>
+                                                                    <li><a href="#" data-id="15" data-name="KATSUYA HOLLYWOOD" class="venue-last">KATSUYA HOLLYWOOD</a></li>
+                                                                    <li><a href="#" data-id="16" data-name="KATSUYA L.A. LIVE" class="venue-last">KATSUYA L.A. LIVE</a></li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">Miami</a>
+                                                        <ul class="dl-submenu">
+                                                            <li class="dl-back"><a href="#">back</a></li>
+                                                            <li>
+                                                                <a href="#">Hotel</a>
+                                                                <ul class="dl-submenu">
+                                                                    <li class="dl-back"><a href="#">back</a></li>
+                                                                    <li><a href="#" data-id="27" data-name="SLS SOUTH BEACH" class="venue-last">SLS SOUTH BEACH</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Nightlife</a>
+                                                                <ul class="dl-submenu">
+                                                                    <li class="dl-back"><a href="#">back</a></li>
+                                                                    <li><a href="#" data-id="22" data-name="HYDE AT AMERICAN AIRLINES ARENA" class="venue-last">HYDE AT AMERICAN AIRLINES ARENA</a></li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <input type="hidden" name="venue_name">
+
+                                        </div>
+                                    </div>
+                                <div class="clearfix"></div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">* Date of Event</label>
+                                    <div class="col-sm-4">
+                                        @*<div class="form-group">*@
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    @*</div>*@
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="guestcount" class="col-md-2 control-label">* Guest Count</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="guest_count" class="form-control" id="guestcount" minlength="1" maxlength="4">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ordernotes" class="col-md-2 control-label">Notes (1000 Characters Max) </label>
+                                    <div class="col-sm-4">
+                                        <textarea name="notes" class="form-control auto-size" id="ordernotes" maxlength="1000"></textarea>
+                                    </div>
+                                </div>
+
+                                <nav>
+                                    <ul class="pager">
+                                        <li class="next"><a id="general-form-btn" class="btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Next <span aria-hidden="true">→</span></a></li>
+                                    </ul>
+                                </nav>
+                                <!--<div class="col-sm-offset-8 col-sm-8">
+                                    <button type="button" class="btn btn-default btn-sm btn-block help" data-toggle="popover" title="Please call this number at SBE" data-content="T: 323-525-2400"><i class="icon-help-circled"></i> Need help? Click here</button>
+                                </div>-->
+
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a id="collapse-two-tab" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="icon-right-open-big pull-right"></i> 2. Credit card and billing information
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <form method="post" class="form-horizontal" id="billing-form" action="/home/billing_info" novalidate="novalidate">
+                                <div class="form-group">
+                                    <label for="cardfirst" class="col-md-2 control-label">* Cardholder First Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="ch_first_name" class="form-control" id="cardfirst" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardlast" class="col-md-2 control-label">* Cardholder Last Name</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="ch_last_name" class="form-control" id="cardlast" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardphone" class="col-md-2 control-label">* Cardholder Telephone Number</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="ch_phone" class="form-control phone-us" id="cardphone" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardadd" class="col-md-2 control-label">* Billing Address</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="billing_address" class="form-control" id="cardadd" maxlength="75">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardadd2" class="col-md-2 control-label">Billing Address 2</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="billing_address2" class="form-control" id="cardadd2" maxlength="75">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardcity" class="col-md-2 control-label">* City</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="city" class="form-control" id="cardcity" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardzip" class="col-md-2 control-label">* State/ZIP</label>
+                                    
+                                    <div class="col-sm-2">
+                                        <select name="state" class="form-control">
+                                            <option value="">Select State</option>
+                                            <option value="AL">Alabama</option>
+                                            <option value="AK">Alaska</option>
+                                            <option value="AZ">Arizona</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="CA">California</option>
+                                            <option value="CO">Colorado</option>
+
+                                        </select>
+                                        @*<div class="btn-group bootstrap-select">
+                                            <button type="button" class="btn dropdown-toggle selectpicker form-control btn-block" data-toggle="dropdown" title="Select State">
+                                                <span class="filter-option pull-left">Select State</span>&nbsp;<span class="caret"></span>
+                                            </button><div class="dropdown-menu open">
+                                                <ul class="dropdown-menu inner selectpicker" role="menu">
+                                                    <li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text=""><span class=&quot;text&quot;>Select State</span><span class="text">Select State</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                    <li data-original-index="1"><a tabindex="0" class="" data-normalized-text=""><span class=&quot;text&quot;>Alabama</span>"><span class="text">Alabama</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                    <li data-original-index="2"><a tabindex="0" class="" data-normalized-text=""><span class=&quot;text&quot;>Alaska</span><span class="text">Alaska</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                    <li data-original-index="3"><a tabindex="0" class="" data-normalized-text=""><span class=&quot;text&quot;>Arizona</span>"><span class="text">Arizona</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                    <li data-original-index="4"><a tabindex="0" class="" data-normalized-text=""><span class=&quot;text&quot;>Arkansas</span>"><span class="text">Arkansas</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                    <li data-original-index="5"><a tabindex="0" class="" data-normalized-text=""><span class=&quot;text&quot;>California</span>"><span class="text">California</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                    <li data-original-index="6"><a tabindex="0" class="" data-normalized-text=""><span class=&quot;text&quot;>Colorado</span>"><span class="text">Colorado</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+
+                                                </ul>
+                                            </div>
+                                        </div>*@
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="text" name="zipcode" class="form-control" id="cardzip" placeholder="ZIP" maxlength="25">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="chargeamount" class="col-md-2 control-label" id="lbchargeamount">* Authorized Charge AMT</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="charge_amount" class="form-control currency-us" id="chargeamount">
+                                    </div>
+                                </div>
+                                <!--<div class="form-group">
+                                      <label for="max-charge-amount" class="col-md-2 control-label">Maximum Amount to Charge</label>
+                                      <div class="col-sm-12">
+                                          <input type="text" name="max_charge_amount" class="form-control currency-us" id="max-charge-amount">
+                                      </div>
+                                  </div>-->
+                                <div class="form-group">
+                                    <label for="cardamount2" class="col-md-2 control-label" id="lbchargeamount2">* Confirm Authorized Charge AMT</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="confirm_charge_amount" class="form-control currency-us" id="cardamount2">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" id="max-charge-amount-cont">
+                                    <label for="max-charge-amount" class="col-md-2 control-label">* Max Charge Allowed</label>
+                                    <div class="col-sm-4" id="maxchargeamount">
+                                        <input type="text" name="max_charge_amount" class="form-control currency-us" id="max-charge-amount">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cardzip" class="col-md-2 control-label">* Select Credit Card</label>
+                                    <div class="col-sm-4">
+                                        <select name="cctype" class="form-control" style="display: block;">
+                                            <option value="" data-icon="amex">American Express</option>
+                                            <option value="" data-icon="visa">Visa</option>
+                                            <option value="" data-icon="mastercard">Mastercard</option>
+
+                                        </select>
+                                        @*<div class="btn-group bootstrap-select credit-cards"><button type="button" class="btn dropdown-toggle selectpicker form-control btn-block" data-toggle="dropdown" title="&amp;lt;i class=&amp;quot;glyphicon amex&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; American Express"><span class="filter-option pull-left"><i class="glyphicon amex"></i> American Express</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;glyphicon amex&quot;></span> <span class=&quot;text&quot;>American Express</span>"><span class="glyphicon amex"></span> <span class="text">American Express</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;glyphicon visa&quot;></span> <span class=&quot;text&quot;>Visa</span>"><span class="glyphicon visa"></span> <span class="text">Visa</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;glyphicon mastercard&quot;></span> <span class=&quot;text&quot;>Mastercard</span>"><span class="glyphicon mastercard"></span> <span class="text">Mastercard</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>*@
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="ccnumber" class="col-md-2 control-label">* Credit Card Number/CCV</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" name="ccnumber" class="form-control" id="ccnumber" maxlength="16">
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <input type="text" name="ccv" class="form-control" placeholder="CCV" maxlength="10">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">* Expiration Date</label>
+                                    <div class="col-sm-2">
+                                        <select name="exp_month" class="form-control" style="display: block;">
+                                            <option>Exp. Month</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                        @*<div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker form-control btn-block" data-toggle="dropdown" title="Exp. Month"><span class="filter-option pull-left">Exp. Month</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Exp. Month</span>"><span class="text">Exp. Month</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>1</span>"><span class="text">1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2</span>"><span class="text">2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>3</span>"><span class="text">3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>4</span>"><span class="text">4</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>5</span>"><span class="text">5</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="6"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>6</span>"><span class="text">6</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="7"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>7</span>"><span class="text">7</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="8"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>8</span>"><span class="text">8</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="9"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>9</span>"><span class="text">9</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="10"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>10</span>"><span class="text">10</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="11"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>11</span>"><span class="text">11</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="12"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>12</span>"><span class="text">12</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>*@
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select name="exp_year" style="display: block;" class="form-control">
+                                            <option>Exp. Year</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                        </select>
+                                        @*<div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker form-control btn-block" data-toggle="dropdown" title="Exp. Year"><span class="filter-option pull-left">Exp. Year</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>Exp. Year</span>"><span class="text">Exp. Year</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2015</span>"><span class="text">2015</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2016</span>"><span class="text">2016</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2017</span>"><span class="text">2017</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2018</span>"><span class="text">2018</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2019</span>"><span class="text">2019</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="6"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2020</span>"><span class="text">2020</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="7"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2021</span>"><span class="text">2021</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="8"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2022</span>"><span class="text">2022</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="9"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2023</span>"><span class="text">2023</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="10"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2024</span>"><span class="text">2024</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="11"><a tabindex="0" class="" data-normalized-text="<span class=&quot;text&quot;>2025</span>"><span class="text">2025</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>*@
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+
+                            <nav>
+                                <ul class="pager">
+                                    <li class="previous"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class=""><span aria-hidden="true">←</span> Previous</a></li>
+                                    <li class="next"><a id="billing-form-btn" class="btn btn-success" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Review Order <span aria-hidden="true">→</span></a></li>
+                                </ul>
+                            </nav>
+
+                            <!--<div class="col-sm-offset-8 col-sm-8">
+                                <button type="button" class="btn btn-default btn-sm btn-block help" data-toggle="popover" title="Please call this number at SBE" data-content="T: 323-525-2400"><i class="icon-help-circled"></i> Need help? Click here</button>
+                            </div>-->
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a id="collapse-three-tab" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="icon-right-open-big pull-right"></i> 3. Review Order
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+
+
+
+                            <form method="post" action="/home/confirm_order" id="review-order-form" class="sigPad" novalidate="novalidate">
+                                <div class="clearfix"></div>
+                                <h4 class="text-center">Order Information</h4>
+                                <dl class="dl-horizontal">
+
+                                    <dt>Group Name: </dt>
+                                    <dd id="review-group_name"></dd>
+
+                                    <dt>Event Name: </dt>
+                                    <dd id="review-event_name"></dd>
+
+                                    <dt>Guest First Name: </dt>
+                                    <dd id="review-guest_first_name"></dd>
+
+                                    <dt>Guest Last Name: </dt>
+                                    <dd id="review-guest_last_name"></dd>
+
+                                    <dt>Guest Email Address: </dt>
+                                    <dd id="review-guest_email"></dd>
+
+                                    <dt>Telephone Number: </dt>
+                                    <dd id="review-phone"></dd>
+
+                                    <dt>Fax Number: </dt>
+                                    <dd id="review-fax"></dd>
+
+                                    <dt>Venue: </dt>
+                                    <dd id="review-venue_name"></dd>
+
+                                    <dt>Date of Event: </dt>
+                                    <dd id="review-event_date"></dd>
+
+                                    <dt>Guest Count: </dt>
+                                    <dd id="review-guest_count"></dd>
+                                    <dt>Notes: </dt>
+                                    <dd id="review-notes"></dd>
+                                </dl>
+
+                                <h4 class="text-center">Credit Card and Billing Information</h4>
+                                <dl class="dl-horizontal">
+
+
+                                    <dt>Cardholder First Name: </dt>
+                                    <dd id="review-ch_first_name"></dd>
+
+                                    <dt>Cardholder Last Name: </dt>
+                                    <dd id="review-ch_last_name"></dd>
+
+                                    <dt>Cardholder Telephone Number: </dt>
+                                    <dd id="review-ch_phone"></dd>
+
+                                    <dt>Billing Address: </dt>
+                                    <dd id="review-billing_address"></dd>
+
+                                    <dt>Billing Address 2: </dt>
+                                    <dd id="review-billing_address2"></dd>
+
+                                    <dt>City: </dt>
+                                    <dd id="review-city"></dd>
+
+                                    <dt>State: </dt>
+                                    <dd id="review-state"></dd>
+                                    <dt>Zip: </dt>
+                                    <dd id="review-zipcode"></dd>
+                                    <dt>Authorized Charge AMT: </dt>
+                                    <dd id="review-charge_amount"></dd>
+                                    <dt>Max Charge Allowed: </dt>
+                                    <dd id="review-max_charge_allowed"></dd>
+                                    <dt>Credit Card Number/CCV: </dt>
+                                    <dd id="review-ccnumber"></dd>
+
+                                    <dt>Expiration Date: </dt>
+                                    <dd id="review-exp_date"></dd>
+                                </dl>
+                                <div class="well well-success aggrement">
+                                    <h3>Agreement of Charge</h3>
+                                    <p>
+                                    </p><p>THE ABOVE NAMED CARD HOLDER, AUTHORIZE THE LOCATION TO CHARGE MY CREDIT CARD (ACCOUNT NUMBER NOTED ABOVE). I AGREE TO PAY THE CHARGED TOTAL AMOUNT ACCORDING TO THE CARD ISSUER AGREEMENT. I STIPULATE THAT CHARGES MADE FOR THIS EVENT ARE NON REFUNDABLEAND NON-TRANSFERABLE. I UNDERSTAND MY CREDIT CARD WILL BE CHARGED IN FULL UPON RECEIPT OF THIS FORM.I WARRANT THAT I AM AWARE THAT FOR ROOMS, ACCOMMODATIONS ARE SUBJECT TO CHANGE AND AVAILABILITY. FOR RESTAURANTS, ITEMS AND TABLES ARE SUBJECT TO CHANGE AND AVAILABILITY. FOR CLUB SERVICE, NOT ALL GUESTS CAN BE GUARANTEED A SEAT NOR CAN ENTRANCE OF ENTIRE GUEST PARTY BE GUARANTEED AS CONDUCT, OCCUPANCY AND OTHER FACTORS MAY PREVAIL. I UNDERSTAND THESE CONDITIONS AND ACCEPT THEM KNOWINGLY AND RELEASE VENUE FROM ANY LIABILITY OR CHARGE OF NON-PERFORMANCE BASED ON THESE CONDITIONS.IN ORDER TO RECEIVE REFUND, CANCELLATION POLICY OF THE VENUE MUST BE ADHERED TO. I HEREBY AGREE TO ALL THESE TERMS AND CONDITIONS AND AUTHORIZE THE VENUE TO CHARGE MY CARD AS REQUESTED IMMEDIATELY. FURTHER, I AUTHORIZE THE VENUE TO PERFORM IDENTITY VERIFICATION WITH MY ISSUING CARD COMPANY.</p>
+                                    <p></p>
+                                </div>
+                                <div class="alert alert-danger" id="confirm-errors" style="z-index:1000;display:none;"></div>
+                                <div class="row">
+                                    <div class="col-ms-8 col-sm-5 col-md-5 col-lg-5">
+                                        <div class="checkbox">
+                                            <label>
+                                                <div class="icheckbox_square" style="position: relative;"><input type="checkbox" name="agree_check" value="1" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> I Agree
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-ms-16 col-sm-10 col-md-11 col-lg-9">
+                                        <div class="input-group form-group">
+                                            <input type="text" name="agree_date" disabled="" class="form-control eventdate" placeholder="Date" aria-describedby="icon-calendar" value="08/10/2015">
+                                            <span class="input-group-addon " id="icon-calendar"><i class="icon-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-ms-offset-8 col-ms-16 col-sm-9 col-md-8 col-lg-10">
+                                        <div class="sig sigWrapper current">
+                                            <canvas class="pad" width="255" height="100"></canvas>
+                                            <div class="typed" style="display: none;"></div>
+                                            <input type="hidden" name="output" class="output" value="">
+                                        </div>
+                                        <a href="#" id="clear"><small>Clear Signature</small></a>
+                                    </div>
+                                </div>
+
+                                <nav>
+                                    <ul class="pager">
+                                        <li class="previous"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><span aria-hidden="true">←</span> Previous</a></li>
+                                        <li class="next"><button type="submit" class="btn btn-success btn-lg" id="review-order-form-btn"><i class="icon-ok"></i> Complete Order</button></li>
+                                    </ul>
+                                </nav>
+
+                                <!--<div class="col-sm-offset-8 col-sm-8">
+                                    <button type="button" class="btn btn-default btn-sm btn-block help" data-toggle="popover" title="Please call this number at SBE" data-content="T: 323-525-2400"><i class="icon-help-circled"></i> Need help? Click here</button>
+                                </div>-->
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a id="collapse-four-tab" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <i class="icon-right-open-big pull-right"></i> Order Completed
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse text-center" role="tabpanel" aria-labelledby="headingFour">
+                        <div class="panel-body">
+                            <h2>Thank you for your order.</h2>
+                            <p>You'll receive confirmation message to the email you provided.</p>
+                            <label class="col-sm-6 control-label"></label>
+                        </div>
+                        <div class="panel-body">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div class="text-center">
+                <p>
+                    <button type="button" class="btn btn-default btn-sm btn-block help" data-toggle="popover" title="Please call this number at SBE" data-content="T: 323-525-2400"><i class="icon-help-circled"></i> Need help? Click here</button>
+                    </p>
+            </div>-->
+        @*</div>*@
+        </div>
+    </div>
+
+    </div>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+<script src="~/Scripts/jquery.dlmenu.js"></script>
+<script>
+			$(function() {
+			    $( '#dl-menu' ).dlmenu();
+			});
+    </script>*@

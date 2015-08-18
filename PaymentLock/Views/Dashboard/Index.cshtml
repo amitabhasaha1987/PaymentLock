@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PaymentLock.Models.DashboardDataModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PaymentLockLayout.cshtml";
+}
+<link href="~/Content/GridView.css" rel="stylesheet" />
+<style>
+    input[type="file"] {
+        margin: 0 0 1em 0;
+    }
+
+    .grid {
+        margin: 0;
+        border-collapse: collapse;
+        width: 100%;
+        font-family: 'Times New Roman', serif;
+    }
+
+        .grid th, .grid td {
+            border: 1px solid #C0C0C0;
+            padding: 5px;
+        }
+
+    .head {
+        background-color: #f8f8f8;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .alt {
+        background-color: #f8f8f8;
+        color: #000;
+    }
+
+    a {
+        color: black;
+    }
+
+    .webgridLabelApprove {
+        color: green;
+        font-weight: bold;
+        padding-right: 79px;
+        float: none;
+        background: url(../images/ApprovedStatus.png) no-repeat right top;
+    }
+
+    .webgridLabelPending {
+        background: url(../images/pendingStatus.png) no-repeat right top; /* add image*/
+        color: #C95400;
+        font-weight: bolder;
+        padding-right: 79px;
+        float: none;
+    }
+</style>
+
+<div id="content" class="content">
+    @*style="min-height:350px;padding:0 40px 0 40px;"*@
+    <div id="DivGrid">
+        <h1>Dashboard</h1>
+        <h3>Events for the next 7 days</h3>
+
+        @{
+            var grid = new WebGrid(source: Model, rowsPerPage: 10);
+            @grid.GetHtml(tableStyle: "PGrid", alternatingRowStyle: "altRow", headerStyle: "Header", footerStyle: "pgr", htmlAttributes: new { id = "DataTable" },      
+                                        //tableStyle: "grid",
+                                        //headerStyle: "head",
+                                        //alternatingRowStyle: "alt",
+                                        columns: new[]  // colums in grid
+                                        {
+                                        grid.Column("Id","#"),
+                                        grid.Column("Order"),
+                                        grid.Column("Name"),
+                                        grid.Column("Groupname"),
+                                        grid.Column("Venue"),
+                                        grid.Column("DateOfEvent","Date Of Event"),
+                                        grid.Column("Status"),
+                                       // grid.Column("chargeAmount","Charge Amount"),
+                                        grid.Column("Charge Amount", header: "Charge Amount", format: (item) =>
+                                         {
+                                             if (item.chargeAmount.ToString()!= "")
+                                             {
+                                                 string a=item.chargeAmount.ToString();
+                                                 return Html.Label("$" + a);
+                                             }
+                                             else
+                                             {
+                                                 return Html.Label("");
+                                             }
+                                         }
+                                            ),
+                                        }
+                                )
+        }
+
+    </div>
+</div>
